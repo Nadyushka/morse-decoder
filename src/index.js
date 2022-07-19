@@ -35,6 +35,7 @@ const MORSE_TABLE = {
 	'---..': '8',
 	'----.': '9',
 	'-----': '0',
+	'5': ' ',
 };
 
 function decode(expr) {
@@ -53,8 +54,11 @@ function decode(expr) {
 
 	for (let j = 0; j < firsfArr.length; j++) {
 		for (let m = 0; m < firsfArr[j].length; m++) {
-
-			if (firsfArr[j][m] == '1') {
+			if (firsfArr[j][m] == '*') {
+				secondArr.push('33');
+				break;
+			}
+			else if (firsfArr[j][m] == '1') {
 				secondArr.push(firsfArr[j].slice(firsfArr[j].indexOf(firsfArr[j][m])));
 				break;
 			}
@@ -71,6 +75,8 @@ function decode(expr) {
 				param += '.';
 			} else if (secondArr[n].slice(k, k + 2) == '11') {
 				param += '-';
+			} else if (secondArr[n].slice(k, k + 2) == '33') {
+				thirdArr.push('5');
 			}
 
 		}
